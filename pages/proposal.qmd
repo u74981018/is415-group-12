@@ -16,7 +16,7 @@ The Romans waged war to gather slaves and wealth. Spain built an empire from its
 
 But war never changes.
 
-Armed conflicts have significant impacts on human security, development, and regional stability. Understanding the spatial and temporal dynamics of these conflicts is critical for policymakers, peacebuilders, and human rights advocates. We aim to visualise conflict trends, identify hotspots, and uncover patterns in our analysis of armed conflict in Indonesia. In particular, the Papua region has been a focal point of prolonged unrest, with political, ethnic, and economic tensions leading to recurring violence. Papua consists of 6 Indonesian provinces: Central Papua, Highland Papua, Papua, South Papua, Southwest Papua, and West Papua. 
+Armed conflicts have significant impacts on human security, development, and regional stability. Understanding the spatial and temporal dynamics of these conflicts is critical for policymakers, peacebuilders, and human rights advocates. We aim to visualise conflict trends, identify hotspots, and uncover patterns in our analysis of armed conflict in Indonesia. In particular, the Papua region has been a focal point of prolonged unrest, with political, ethnic, and economic tensions leading to recurring violence. Papua consists of 6 Indonesian provinces: Central Papua, Highland Papua, Papua, South Papua, Southwest Papua, and West Papua.
 
 The Papua conflict has been ongoing since 1962, between Indonesia and the OPM. By 2007, an estimated 100,000 to 300,000 Papuans have been killed by Indonesian forces, and countless more having experienced violence.
 
@@ -47,7 +47,13 @@ This project thus aims to shed light on the conflict and inform intervention str
 
 -   **Correlation Insights:** An analysis of conflict in relation to socio-economic and political variables, providing context for the causes and impacts of violence in the Papua region.
 
-## 
+# 2. Lit Review
+
+-   [Sujarwoto (2017)](https://doi.org/10.22146/ijg.26889) used data from the 2008 Village Potential Census (Podes) and statistics on communal conflict across districts to show that communal conflicts exhibit clustering, and argued that this is a result of clustering of underlying determinants such as poverty and weak local government capacity.
+
+-   [Pierskalla and Sacks (2017)](https://www.sciencedirect.com/science/article/abs/pii/S0305750X15304472) used data from Indonesia’s National Violence Monitoring System (NVMS) to examine the relationship between dimensions of government decentralization and different types of local violence in Indonesian districts during 2001 to 2010, and found that different decentralization measures have opposite effects on various types of local violence.
+
+Although these studies produced useful insights on the factors that may contribute to higher rates of conflict events, they do not focus specifically on the unique context of the Papua conflict and rely on data that is over the decade old. Our application thus aims to allow enterprising users to partially fill this gap by studying the patterns of conflict in Papua after Joko Widodo became President of Indonesia in late 2014.
 
 # 3. Approach
 
@@ -112,7 +118,7 @@ Our application will have the following features:
 We will be using data from the following sources in our application, after appropriate processing.
 
 | Data                                   | Source                                                                     | Description                                                                                                                                                                                          |
-|-----------------------|------------------|--------------------------------|
+|-----------------------|------------------|-------------------------------|
 | Armed conflict events in Indonesia     | [ACLED](https://acleddata.com/data-export-tool/)                           | Data in csv format, providing location, date, and other attribute information on 6 types of armed conflict events in Indonesia occurring from 1 January 2015 to 30 June 2024.                        |
 | Administrative boundaries of Indonesia | [Humanitarian Data Exchange](https://data.humdata.org/dataset/cod-ab-idn?) | Polygon feature data in ESRI shapefile format, providing information on Indonesia's subnational administrative level 1 (provinsi/province) and level 2 (kota, kabupaten / city, regency) boundaries. |
 
