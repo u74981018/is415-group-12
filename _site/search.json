@@ -1,0 +1,23 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "IS415",
+    "section": "",
+    "text": "Welcome to the homepage (WIP)"
+  },
+  {
+    "objectID": "pages/proposal.html",
+    "href": "pages/proposal.html",
+    "title": "Project Proposal: Armed Conflict in Indonesia",
+    "section": "",
+    "text": "War. War never changes.\nThe Romans waged war to gather slaves and wealth. Spain built an empire from its lust for gold and territory. Hitler shaped a battered Germany into an economic superpower.\nBut war never changes.\nArmed conflicts have significant impacts on human security, development, and regional stability. Understanding the spatial and temporal dynamics of these conflicts is critical for policymakers, peacebuilders, and human rights advocates. We aim to visualise conflict trends, identify hotspots, and uncover patterns in our analysis of armed conflict in Indonesia. In particular, the Papua region has been a focal point of prolonged unrest, with political, ethnic, and economic tensions leading to recurring violence. This project aims to shed light on the conflict and inform intervention strategies, contributing to long-term peace and stability.\n\n\n\nTo map the spatial distribution of armed conflicts in Indonesia, with a focus on Papua, using ACLED (Armed Conflict Location & Event Data) data.\nTo identify conflict hotspots and temporal trends, highlighting regions within Papua most affected by violence.\nTo analyze the relationship between conflict events and socio-political or economic factors, such as resource distribution and ethnic demographics.\nTo provide data-driven insights that can assist stakeholders in developing targeted peacebuilding initiatives or security interventions.\n\n\n\n\n\nConflict Map: A geospatial visualisation of conflict events across Indonesia, with the emphasis on the Papua region. The map will include filters for conflict type, actor groups, and event severity.\nTemporal Analysis: Track changes in conflict intensity and frequency over time, helping identify peak periods of violence or emerging trends.\nHotspot Identification: Spatial analytics to pinpoint regions that are consistently affected by armed conflic.\nCorrelation Insights: An analysis of conflict in relation to socio-economic and political variables, providing context for the causes and impacts of violence in the Papua region."
+  },
+  {
+    "objectID": "pages/proposal.html#introduction",
+    "href": "pages/proposal.html#introduction",
+    "title": "Project Proposal: Armed Conflict in Indonesia",
+    "section": "",
+    "text": "War. War never changes.\nThe Romans waged war to gather slaves and wealth. Spain built an empire from its lust for gold and territory. Hitler shaped a battered Germany into an economic superpower.\nBut war never changes.\nArmed conflicts have significant impacts on human security, development, and regional stability. Understanding the spatial and temporal dynamics of these conflicts is critical for policymakers, peacebuilders, and human rights advocates. We aim to visualise conflict trends, identify hotspots, and uncover patterns in our analysis of armed conflict in Indonesia. In particular, the Papua region has been a focal point of prolonged unrest, with political, ethnic, and economic tensions leading to recurring violence. This project aims to shed light on the conflict and inform intervention strategies, contributing to long-term peace and stability.\n\n\n\nTo map the spatial distribution of armed conflicts in Indonesia, with a focus on Papua, using ACLED (Armed Conflict Location & Event Data) data.\nTo identify conflict hotspots and temporal trends, highlighting regions within Papua most affected by violence.\nTo analyze the relationship between conflict events and socio-political or economic factors, such as resource distribution and ethnic demographics.\nTo provide data-driven insights that can assist stakeholders in developing targeted peacebuilding initiatives or security interventions.\n\n\n\n\n\nConflict Map: A geospatial visualisation of conflict events across Indonesia, with the emphasis on the Papua region. The map will include filters for conflict type, actor groups, and event severity.\nTemporal Analysis: Track changes in conflict intensity and frequency over time, helping identify peak periods of violence or emerging trends.\nHotspot Identification: Spatial analytics to pinpoint regions that are consistently affected by armed conflic.\nCorrelation Insights: An analysis of conflict in relation to socio-economic and political variables, providing context for the causes and impacts of violence in the Papua region."
+  }
+]

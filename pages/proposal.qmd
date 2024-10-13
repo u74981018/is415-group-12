@@ -1,0 +1,38 @@
+---
+title: "Project Proposal: Armed Conflict in Indonesia"
+authors: "Samuel Goh, Immanuel Leong, Lucas Vial"
+date: '2024-10-13'
+execute: 
+  eval: true
+  echo: true
+  freeze: true
+---
+
+## 1.0 Introduction
+
+War. War never changes.
+
+The Romans waged war to gather slaves and wealth. Spain built an empire from its lust for gold and territory. Hitler shaped a battered Germany into an economic superpower.
+
+But war never changes.
+
+Armed conflicts have significant impacts on human security, development, and regional stability. Understanding the spatial and temporal dynamics of these conflicts is critical for policymakers, peacebuilders, and human rights advocates. We aim to visualise conflict trends, identify hotspots, and uncover patterns in our analysis of armed conflict in Indonesia. In particular, the Papua region has been a focal point of prolonged unrest, with political, ethnic, and economic tensions leading to recurring violence. This project aims to shed light on the conflict and inform intervention strategies, contributing to long-term peace and stability.
+
+### Project Objectives
+
+1.  To map the spatial distribution of armed conflicts in Indonesia, with a focus on Papua, using ACLED (Armed Conflict Location & Event Data) data.
+2.  To identify conflict hotspots and temporal trends, highlighting regions within Papua most affected by violence.
+3.  To analyze the relationship between conflict events and socio-political or economic factors, such as resource distribution and ethnic demographics.
+4.  To provide data-driven insights that can assist stakeholders in developing targeted peacebuilding initiatives or security interventions.
+
+### Project Features
+
+-   **Conflict Map:** A geospatial visualisation of conflict events across Indonesia, with the emphasis on the Papua region. The map will include filters for conflict type, actor groups, and event severity.
+
+-   **Temporal Analysis:** Track changes in conflict intensity and frequency over time, helping identify peak periods of violence or emerging trends.
+
+-   **Hotspot Identification:** Spatial analytics to pinpoint regions that are consistently affected by armed conflic.
+
+-   **Correlation Insights:** An analysis of conflict in relation to socio-economic and political variables, providing context for the causes and impacts of violence in the Papua region.
+
+## 
