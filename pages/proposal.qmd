@@ -16,7 +16,19 @@ The Romans waged war to gather slaves and wealth. Spain built an empire from its
 
 But war never changes.
 
-Armed conflicts have significant impacts on human security, development, and regional stability. Understanding the spatial and temporal dynamics of these conflicts is critical for policymakers, peacebuilders, and human rights advocates. We aim to visualise conflict trends, identify hotspots, and uncover patterns in our analysis of armed conflict in Indonesia. In particular, the Papua region has been a focal point of prolonged unrest, with political, ethnic, and economic tensions leading to recurring violence. This project aims to shed light on the conflict and inform intervention strategies, contributing to long-term peace and stability.
+Armed conflicts have significant impacts on human security, development, and regional stability. Understanding the spatial and temporal dynamics of these conflicts is critical for policymakers, peacebuilders, and human rights advocates. We aim to visualise conflict trends, identify hotspots, and uncover patterns in our analysis of armed conflict in Indonesia. In particular, the Papua region has been a focal point of prolonged unrest, with political, ethnic, and economic tensions leading to recurring violence. Papua consists of 6 Indonesian provinces: Central Papua, Highland Papua, Papua, South Papua, Southwest Papua, and West Papua. 
+
+The Papua conflict has been ongoing since 1962, between Indonesia and the OPM. By 2007, an estimated 100,000 to 300,000 Papuans have been killed by Indonesian forces, and countless more having experienced violence.
+
+When Joko Widodo became Indonesia’s president in 2014, there was hope for a resolution to the crisis. He released a handful of Papuan political prisoners and vowed to address the 2014 Paniai human rights abuse case, relating to an incident where the Indonesian army fired on hundreds of Papuan protesters, killed four teenagers, and wounded more than a dozen others in highland Papua. A promise to open West Papua to foreign journalists was seen by many as another sign of Widodo’s goodwill.
+
+However, the commitment to address the conflict fell apart in the waning days of his first administration.
+
+Under Widodo’s second administration since 2019, Papuan grievances have intensified. Instead of the root causes of the conflict, the state has focused chiefly on development and infrastructure programmes, including the Trans Papua highway that’s under construction in some regencies in West Papua, a food estate, a special economic zone, strategic tourism areas and palm oil plantations.
+
+The issues in Papua are of critical importance due to their significant humanitarian and socio-political implications. The frequent violence has stunted the region’s development, hindered economic growth, and caused long-term social fragmentation. However, despite the severity of the situation, Papua often remains underreported on a global scale. Understanding the drivers and geography of conflict in this region can pave the way for more effective peacebuilding. What makes this problem particularly interesting—and difficult to solve—is the intersection of spatial, political, and socioeconomic complexities. Armed conflict data for Papua is not only vast but also deeply interwoven with factors such as ethnic diversity and cultural practices.
+
+This project thus aims to shed light on the conflict and inform intervention strategies, contributing to long-term peace and stability.
 
 ### Project Objectives
 
@@ -101,7 +113,7 @@ We will be using data from the following sources in our application, after appro
 
 | Data                                   | Source                                                                     | Description                                                                                                                                                                                          |
 |-----------------------|------------------|--------------------------------|
-| Armed conflict events in Indonesia     | [ACLED](https://acleddata.com/data-export-tool/)                           | Data in csv format, providing location, date, and other attribute information on 6 types of armed conflict events in Indonesia occurring from 1 January 2018 to 30 June 2024.                        |
+| Armed conflict events in Indonesia     | [ACLED](https://acleddata.com/data-export-tool/)                           | Data in csv format, providing location, date, and other attribute information on 6 types of armed conflict events in Indonesia occurring from 1 January 2015 to 30 June 2024.                        |
 | Administrative boundaries of Indonesia | [Humanitarian Data Exchange](https://data.humdata.org/dataset/cod-ab-idn?) | Polygon feature data in ESRI shapefile format, providing information on Indonesia's subnational administrative level 1 (provinsi/province) and level 2 (kota, kabupaten / city, regency) boundaries. |
 
 # 5. R Packages
