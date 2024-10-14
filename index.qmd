@@ -1,3 +1,11 @@
 Welcome to the homepage (WIP)
 
-Test
+Armed conflicts have significant impacts on human security, development, and regional stability. Understanding the spatial and temporal dynamics of these conflicts is critical for policymakers, peacebuilders, and human rights advocates. We aim to visualise conflict trends, identify hotspots, and uncover patterns in our analysis of armed conflict in Indonesia. In particular, the Papua region has been a focal point of prolonged unrest, with political, ethnic, and economic tensions leading to recurring violence. Papua consists of 6 Indonesian provinces: Central Papua, Highland Papua, Papua, South Papua, Southwest Papua, and West Papua.
+
+The Papua conflict has been ongoing since 1962, between Indonesia and the OPM. By 2007, an estimated 100,000 to 300,000 Papuans have been killed by Indonesian forces, and countless more having experienced violence.
+
+### Project Objectives
+
+1.  To map the spatial distribution of armed conflicts in Indonesia, with a focus on Papua, using ACLED (Armed Conflict Location & Event Data) data.
+2.  To identify conflict hotspots and temporal trends, highlighting regions within Papua most affected by violence.
+3.  To provide data-driven insights that can assist stakeholders in developing targeted peacebuilding initiatives or security interventions.
