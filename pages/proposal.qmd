@@ -114,9 +114,9 @@ Our application will have the following features:
 
 We will be using data from the following sources in our application, after appropriate processing.
 
-| Data                                   | Source                                                                     | Description                                                                                                                                                                                          |
+| Data | Source | Description |
 |-----------------------|------------------|-------------------------------|
-| Armed conflict events in Indonesia     | [ACLED](https://acleddata.com/data-export-tool/)                           | Data in csv format, providing location, date, and other attribute information on 6 types of armed conflict events in Indonesia occurring from 1 January 2015 to 30 June 2024.                        |
+| Armed conflict events in Indonesia | [ACLED](https://acleddata.com/data-export-tool/) | Data in csv format, providing location, date, and other attribute information on 6 types of armed conflict events in Indonesia occurring from 1 January 2015 to 30 June 2024. |
 | Administrative boundaries of Indonesia | [Humanitarian Data Exchange](https://data.humdata.org/dataset/cod-ab-idn?) | Polygon feature data in ESRI shapefile format, providing information on Indonesia's subnational administrative level 1 (provinsi/province) and level 2 (kota, kabupaten / city, regency) boundaries. |
 
 # 5. R Packages
@@ -145,6 +145,10 @@ We will use the following R packages for our application.
 
 ## Spatial Point Patterns Analysis Page
 
+![](images/KDE_storyboard.png)
+
 ## Spatiotemporal Point Patterns Analysis Page
 
-# 7. Timeline
+![](images/KDE_storyboard-01.png)
+
+# 
