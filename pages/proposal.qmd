@@ -34,8 +34,7 @@ This project thus aims to shed light on the conflict and inform intervention str
 
 1.  To map the spatial distribution of armed conflicts in Indonesia, with a focus on Papua, using ACLED (Armed Conflict Location & Event Data) data.
 2.  To identify conflict hotspots and temporal trends, highlighting regions within Papua most affected by violence.
-3.  To analyze the relationship between conflict events and socio-political or economic factors, such as resource distribution and ethnic demographics.
-4.  To provide data-driven insights that can assist stakeholders in developing targeted peacebuilding initiatives or security interventions.
+3.  To provide data-driven insights that can assist stakeholders in developing targeted peacebuilding initiatives or security interventions.
 
 ### Project Features
 
@@ -44,8 +43,6 @@ This project thus aims to shed light on the conflict and inform intervention str
 -   **Temporal Analysis:** Track changes in conflict intensity and frequency over time, helping identify peak periods of violence or emerging trends.
 
 -   **Hotspot Identification:** Spatial analytics to pinpoint regions that are consistently affected by armed conflic.
-
--   **Correlation Insights:** An analysis of conflict in relation to socio-economic and political variables, providing context for the causes and impacts of violence in the Papua region.
 
 # 2. Lit Review
 
