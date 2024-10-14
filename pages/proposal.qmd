@@ -149,6 +149,4 @@ We will use the following R packages for our application.
 
 ## Spatiotemporal Point Patterns Analysis Page
 
-![](images/KDE_storyboard-01.png)
-
-# 
+# ![](images/STKDE-01.png)
