@@ -104,7 +104,7 @@ Our application will have the following features:
 
         They will also be able to specify the edge correction to be applied and the number of simulations to be generated in the Monte Carlo test.
 
-## 3.3 Spatio Point Patterns Analysis: 1st and 2nd Order
+## 3.3 Spatiotemporal Point Patterns Analysis: 1st and 2nd Order
 
 -   Users will be able to derive quarterly or monthly spatiotemporal kernel density estimation (STKDE) layers for armed conflict point events in their chosen study area, which will be displayed in a single animation.
 

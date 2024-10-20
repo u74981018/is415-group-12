@@ -61,5 +61,12 @@
     "title": "Project Proposal: Armed Conflict in Indonesia",
     "section": "Spatiotemporal Point Patterns Analysis Page",
     "text": "Spatiotemporal Point Patterns Analysis Page"
+  },
+  {
+    "objectID": "pages/proposal.html#spatiotemporal-point-patterns-analysis-1st-and-2nd-order",
+    "href": "pages/proposal.html#spatiotemporal-point-patterns-analysis-1st-and-2nd-order",
+    "title": "Project Proposal: Armed Conflict in Indonesia",
+    "section": "3.3 Spatiotemporal Point Patterns Analysis: 1st and 2nd Order",
+    "text": "3.3 Spatiotemporal Point Patterns Analysis: 1st and 2nd Order\n\nUsers will be able to derive quarterly or monthly spatiotemporal kernel density estimation (STKDE) layers for armed conflict point events in their chosen study area, which will be displayed in a single animation.\nUsers will be able to compute and visualise the space-time inhomogeneous K-function for their chosen study area, which will allow them to assess the spatiotemporal aggregation or regularity of the point process."
   }
 ]
