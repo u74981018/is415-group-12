@@ -1,0 +1,352 @@
+---
+title: "Data Wrangling"
+date: "November 11, 2024"
+date-modified: "last-modified"
+execute: 
+  eval: true
+  echo: true
+  warning: false
+  freeze: true
+---
+
+# **Data Wrangling for Geospatial Analytics Shiny Application**
+
+## 1.0 Overview
+
+We prepare the following data layers:
+
+-   A study area layer in sf polygon feature format, at Indonesia's admin1 (provinsi/province) level.
+
+-   A study area layer in sf polygon feature format, at Indonesia's admin2 (kota & kabupaten/city & regency) level.
+
+-   A point events layer in sf point feature format, showing the location, date and other attributes of armed conflict events in the Papua region.
+
+## 2.0 Packages
+
+The following R packages are used:
+
+-   [**tidyverse**](https://cran.r-project.org/web/packages/tidyverse/index.html), a collection of R packages designed for data science, and which provides functions to import, transform, and visualise the data.
+
+-   [**sf**](https://cran.r-project.org/web/packages/sf/index.html), to import, manage and process vector-based geospatial data in R.
+
+-   [**tmap**](https://cran.r-project.org/web/packages/tmap/index.html), which provides functions for plotting cartographic quality static point patterns maps or interactive maps.
+
+-   [**spatstat**](https://cran.r-project.org/web/packages/spatstat/index.html), a comprehensive open-source toolbox for analysing Spatial Point Patterns.
+
+-   [**rmapshaper**](https://cran.r-project.org/web/packages/rmapshaper/index.html), a package for editing and simplifying sf objects.
+
+*p_load()* function of pacman package is used to install and load these packages into the R environment.
+
+```{r}
+pacman::p_load(tidyverse, sf, tmap, spatstat, rmapshaper)
+```
+
+## 3.0 Preparing geospatial data
+
+### 3.0.1 Importing the data and reprojecting it
+
+Import `Batas_Wilayah_KelurahanDesa_10K_AR` as a simple features object, which we name `admin`. This dataset provides information on Indonesia's admin4 (village/desa and kelurahan) administrative boundaries as of 2023.
+
+```{r}
+#| eval: FALSE
+
+admin <- st_read(dsn = "data/BATAS WILAYAH KELURAHAN-DESA 10K", layer = "Batas_Wilayah_KelurahanDesa_10K_AR")
+
+glimpse(admin)
+```
+
+We also observe that `admin` is projected in WGS 84.
+
+Sometimes, when importing geospatial data into R, the coordinate system of the source data is wrongly assigned during the importing process. We check the CRS.
+
+```{r}
+#| eval: FALSE
+
+st_crs(admin)
+```
+
+The EPSG code indicated is 4326, which is correct since the data is projected in WGS 84.
+
+### 3.0.2 Selecting the study area
+
+`admin` contains 83518 features, each representing a village. However, for our study, we only require the data for villages in the Papua region, which consists of 6 provinces (as of 2023): Papua Selatan (South Papua), Papua Tengah (Central Papua), Papua Pegunungan (Mountains Papua), Papua Barat Daya (South-West Papua), Papua Barat (West Papua), and Papua.
+
+The WADMPR field of `admin` contains the name of the province that each village belongs to.
+
+All the provinces in the Papua region have the word "Papua" in their names. In the following code chunk, we extract the rows of `admin` that contain the word "Papua" in the WADMPR field and save them as a new object `papua`.
+
+*grepl()* of base R is used to obtain a logical vector indicating whether each element of `admin$WADMPR` contains a match to the word "Papua". Then, *filter()* of **dplyr** (part of the **tidyverse**) is used to retain only the corresponding rows of `admin_`. Next, *rename()* of **dplyr** is used to rename the WADMPR field to "Province".
+
+```{r}
+#| eval: FALSE
+
+papua <- admin %>%
+  filter(grepl("Papua", WADMPR, fixed = TRUE)) %>%
+  rename(Province = WADMPR)
+
+papua
+```
+
+As required, `papua` is a sf polygon data.frame. It has 7374 features.
+
+Finally, we check whether geometries of all the features in `papua` are valid.
+
+```{r}
+#| eval: FALSE
+
+length(which(st_is_valid(papua) == TRUE))
+```
+
+Only 7371 features have valid geometries, out of a total of 7374. Using *st_make_valid()* of **sf**, we make the invalid geometries valid. Next, we use *mutate()* of **dplyr** to replace the existing geometry column with a new one containing the valid geometries. We save the result as a new sf polygon data.frame, `papua_cleaned`.
+
+```{r}
+#| eval: FALSE
+
+papua_cleaned <- papua %>%
+  mutate(geometry = st_make_valid(geometry))
+
+length(which(st_is_valid(papua_cleaned) == TRUE))
+```
+
+`papua_cleaned` is projected in WGS 84. In this code chunk, we reproject it in the projected coordinate system in the DGN95 / UTM zone 53S coordinate system, and save the reprojected data as a new object `papua_23883`.
+
+```{r}
+#| eval: FALSE
+
+papua_23883 <- st_transform(papua_cleaned, crs = 23883) 
+
+st_geometry(papua_23883)
+```
+
+## 3.1 Preparing the admin1 and admin2 layers
+
+### 3.1.1 Obtaining admin2 boundaries
+
+The WADMKK field of `papua_cleaned` contains the name of each city/regency that each village belongs to.
+
+We first use *rename()* of dplyr to rename the WADMKK field to "City/Regency". Next, we use *group_by()* of **dplyr** to group the different villages according to the province as well as city/regency they belong in. Then, we use *summarise()* of **dplyr** and *st_union()* of **sf** to combine the geometries of the different villages within each city/regency and dissolve the boundaries between villages, thus obtaining the admin2 (city/regency) level boundaries. Finally, we use *ms_simplify()* of **rmapshaper** to simplify the polygons, using the Visvalingam algorithm.
+
+```{r}
+#| eval: FALSE
+
+papua_adm2 <- papua_23883 %>%
+  rename(`City/Regency` = WADMKK) %>%
+  group_by(Province, `City/Regency`) %>%
+  summarise(geometry = st_union(geometry)) %>%
+  ms_simplify()
+
+papua_adm2
+```
+
+We can now save the `papua_adm2` study area layer using *write_rds()* of **readr**, part of the **tidyverse***.*
+
+```{r}
+#| eval: FALSE
+
+write_rds(papua_adm2, "data/rds/papua_adm2.rds")
+```
+
+```{r}
+#| echo: FALSE
+
+papua_adm2 <- read_rds("data/rds/papua_adm2.rds")
+```
+
+We visualise the admin2 boundaries in `papua_adm2` using *plot()*.
+
+```{r}
+
+plot(papua_adm2["City/Regency"])
+```
+
+### 3.1.2 Obtaining admin1 boundaries
+
+Now, we can use *group_by()* of **dplyr** to group the different cities/regencies according to the province they belong in. Then, we use *summarise()* of **dplyr** and *st_union()* of **sf** to combine the geometries of the different cities/regencies within each province and dissolve the boundaries between them, thus obtaining the admin1 (province) level boundaries.
+
+```{r}
+#| eval: FALSE
+
+papua_adm1 <- papua_adm2 %>%
+  group_by(Province) %>%
+  summarise(geometry = st_union(geometry))
+```
+
+We can now save the `papua_adm1` study area layer using the *write_rds()* function of **readr**, part of the **tidyverse**.
+
+```{r}
+#| eval: FALSE
+
+write_rds(papua_adm1, "data/rds/papua_adm1.rds")
+```
+
+```{r}
+#| echo: FALSE
+
+papua_adm1 <- read_rds("data/rds/papua_adm1.rds")
+```
+
+```{r}
+plot(papua_adm1)
+```
+
+## 4.0 Preparing point events data
+
+### 4.0.1 Importing the data
+
+We import `2015-01-01-2024-06-30-Indonesia.csv`. This dataset provides location, date, and other attribute information on 6 types of armed conflict events in Indonesia occurring from 1 January 2015 to 30 June 2024. Since it is in csv format, we use the *read_csv()* function of **readr**, part of the **tidyverse**, to import it, and save it as an object named `points`.
+
+```{r}
+
+points <- read_csv("data/2015-01-01-2024-06-30-Indonesia.csv")
+
+glimpse(points)
+```
+
+### 4.0.2 Converting and Reprojecting the Data
+
+The longitude and latitude fields capture the x- and y-coordinates of the data points respectively. They appear to be in the WGS 84 geographic coordinate system (in which latitudes range from -90 to 90 and longitudes range from 0 to 360).
+
+We convert `points` to an sf object.
+
+```{r}
+
+points_sf <- st_as_sf(points, coords = c("longitude","latitude"), crs = 4326)
+
+st_geometry(points_sf)
+```
+
+We reproject `points_sf` in the DGN95 / UTM zone 53S coordinate system, and save the reprojected data as a new object `points_23883`.
+
+```{r}
+
+points_23883 <- st_transform(points_sf, crs = 23883)
+
+st_geometry(points_23883)
+```
+
+### 4.0.3 Selecting Points in the Study Area
+
+`points_23883` provides information on armed conflict events throughout Indonesia, and the admin1 field contains the name of the province where each point event took place.
+
+As mentioned earlier, our study area is the region of Papua, consisting of 6 provinces. 4 of these, namely Papua Selatan (South Papua), Papua Tengah (Central Papua), Papua Pegunungan (Highland Papua), Papua Barat Daya (Southwest Papua), were only created in [2022](https://unstats.un.org/unsd/ungegn/sessions/3rd_session_2023/documents/GEGN.2_2023_50_CRP50.pdf), when they were carved out of the original 2 provinces of Papua and Papua Barat (West Papua).
+
+We use *filter()* and *grepl()* to extract only the armed conflict events that take place in provinces containing the word "Papua" from `points_23883`. In addition, we use *select()*, also part of **dplyr**, to retain only the fields containing the event date, event type, involved parties (actor 1 and actor 2), the province (admin 1) and regency/city (admin2) where the event occurred, the number of fatalities, notes about the event, and the point geometry, for each event.
+
+Lastly, we use *mutate()* from **dplyr** and *dmy()* of base R to convert the values in the event_date field to Date class.
+
+```{r}
+
+points_study <- points_23883 %>%
+  filter(grepl("Papua", admin1, fixed = TRUE)) %>%
+  select(event_date, event_type, actor1, actor2, admin1, admin2, fatalities, notes, geometry) %>%
+  mutate(event_date = dmy(event_date))
+
+points_study
+```
+
+There are 2942 features in the `points_study` sf point data.frame, corresponding to 2942 armed conflict point events.
+
+We verify that the geometries of all the point events are valid.
+
+```{r}
+
+
+length(which(st_is_valid(points_study) == TRUE))
+```
+
+### 4.0.4 Dealing with Duplicate Points
+
+In spatial point patterns analysis, a significant issue is the presence of duplicates. The statistical methodology used for spatial points patterns processes is based largely on the assumption that processes are simple, that the points cannot be coincident.
+
+To check for duplicate points in `points_study`, we use the following code chunk:
+
+```{r}
+any(duplicated(points_study$geometry))
+```
+
+To tackle this problem, we use *st_jitter()* of **sf** to slightly shift the duplicate points by 10 meters each such that they no longer occur at the same point, to make them unique.
+
+```{r}
+points_study_jitter <- points_study %>%
+  st_jitter(amount = 10)
+```
+
+## 5.0 Ensuring Consistency in Area Names
+
+In `papua_adm1` and `papua_adm2`, the province and city/regency names appear to be in Bahasa Indonesia. On the other hand, in the admin1 and admin2 fields of `points_study`, the names given are in English.
+
+The following code chunk uses *filter()*, *group_by()* and *summarize()* of **dplyr** to identify the English-language province names in `points_study_jitter` that are different from the Bahasa Indonesia names in `papua_adm1`, and vice versa.
+
+```{r}
+points_study_jitter %>%
+  filter(!(admin1 %in% papua_adm1$Province)) %>%
+  group_by(admin1) %>%
+  summarize()
+
+papua_adm1 %>%
+  filter(!(Province %in% points_study_jitter$admin1)) %>%
+  group_by(Province) %>%
+  summarize()
+
+```
+
+Next, we use *mutate()* of **dplyr** and *str_replace_all()* of **stringr** (also part of the **tidyverse**) to replace the English-language names in `points_study` with the Bahasa Indonesia equivalents from `papua_adm1`.
+
+```{r}
+points_study1 <- points_study_jitter %>%
+  mutate(admin1 = str_replace_all(admin1, c("Central Papua" = "Papua Tengah", "Highland Papua" = "Papua Pegunungan", "South Papua" = "Papua Selatan", "Southwest Papua" = "Papua Barat Daya", "West Papua" = "Papua Barat")))
+```
+
+Next, we use *filter()*, *group_by()* and *summarize()* of **dplyr** again to identify the city/regency names in `points_study1` that are different from the Bahasa Indonesia names in `papua_adm2`, and vice versa.
+
+```{r}
+points_study1 %>%
+  filter(!(admin2 %in% papua_adm2$`City/Regency`)) %>%
+  group_by(admin2) %>%
+  summarize()
+
+papua_adm2 %>%
+  filter(!(`City/Regency` %in% points_study1$admin2)) %>%
+  group_by(`City/Regency`) %>%
+  summarize()
+```
+
+We use *mutate()* of **dplyr** and *str_replace_all()* of **stringr** to replace the names in `points_study1` with the corresponding equivalents from `papua_adm2`.
+
+```{r}
+points_study_final <- points_study1 %>%
+  mutate(admin2 = str_replace_all(admin2, c("Central Mamberamo" = "Mamberamo Tengah", "Fakfak" = "Fak Fak", "South Manokwari" = "Manokwari Selatan", "South Sorong" = "Sorong Selatan", "Yapen Islands" = "Kepulauan Yapen")))
+
+points_study_final
+```
+
+We can now save the `points_study_final` layer using *write_rds()*.
+
+```{r}
+#| eval: FALSE  
+
+write_rds(points_study_final, "data/rds/points_study_final.rds")
+```
+
+```{r}
+#| echo: FALSE
+
+points_study_final <- read_rds("data/rds/points_study_final.rds")
+
+```
+
+We can now plot all the layers using **tmap**.
+
+```{r}
+
+tmap_mode("plot")
+
+tm_shape(papua_adm1) +
+  tm_polygons(col = "MAP_COLORS") +
+  tm_shape(papua_adm2) +
+  tm_polygons(col = "MAP_COLORS") +
+  tm_shape(points_study_final) +
+  tm_dots()
+
+
+```

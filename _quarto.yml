@@ -5,8 +5,14 @@ website:
   title: "IS415"
   navbar:
     left:
-    - text: "Proposal"
+    - text: "Project Overview"
       href: "pages/proposal.html"
+    - text: "Data Wrangling"
+      href: "pages/data_wrangling.html"
+    - text: "User Guide"
+      href: "https://docs.google.com/document/d/1WAmdhcvjw7V_B4deXYkG3NksPox55hJTpmKSp5yUu_k/edit?usp=sharing"
+    - text: "Shiny App"
+      href: "https://kyleong.shinyapps.io/Shiny_Project/"
 format:
   html:
     theme: cosmo

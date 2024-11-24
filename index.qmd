@@ -1,8 +1,6 @@
-Welcome to the homepage (WIP)
+Welcome to our project homepage for IS415: Geospatial Analytics and Applications.
 
 Armed conflicts have significant impacts on human security, development, and regional stability. Understanding the spatial and temporal dynamics of these conflicts is critical for policymakers, peacebuilders, and human rights advocates. We aim to visualise conflict trends, identify hotspots, and uncover patterns in our analysis of armed conflict in Indonesia. In particular, the Papua region has been a focal point of prolonged unrest, with political, ethnic, and economic tensions leading to recurring violence. Papua consists of 6 Indonesian provinces: Central Papua, Highland Papua, Papua, South Papua, Southwest Papua, and West Papua.
-
-The Papua conflict has been ongoing since 1962, between Indonesia and the OPM. By 2007, an estimated 100,000 to 300,000 Papuans have been killed by Indonesian forces, and countless more having experienced violence.
 
 ### Project Objectives
 

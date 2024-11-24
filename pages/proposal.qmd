@@ -1,5 +1,5 @@
 ---
-title: "Project Proposal: Armed Conflict in Indonesia"
+title: "Project Overview: Armed Conflict in Indonesia"
 authors: "Samuel Goh, Immanuel Leong, Lucas Vial"
 date: '2024-10-13'
 execute: 
@@ -8,7 +8,7 @@ execute:
   freeze: true
 ---
 
-## 1.0 Introduction
+# 1. Introduction
 
 War. War never changes.
 
@@ -20,11 +20,13 @@ Armed conflicts have significant impacts on human security, development, and reg
 
 The Papua conflict has been ongoing since 1962, between Indonesia and the OPM. By 2007, an estimated 100,000 to 300,000 Papuans have been killed by Indonesian forces, and countless more having experienced violence.
 
-When Joko Widodo became Indonesia’s president in 2014, there was hope for a resolution to the crisis. He released a handful of Papuan political prisoners and vowed to address the 2014 Paniai human rights abuse case, relating to an incident where the Indonesian army fired on hundreds of Papuan protesters, killed four teenagers, and wounded more than a dozen others in highland Papua. A promise to open West Papua to foreign journalists was seen by many as another sign of Widodo’s goodwill.
+As reported by [Al Jazeera](https://www.aljazeera.com/opinions/2023/3/14/why-indonesia-is-losing-the-west-papua-conflict):
 
-However, the commitment to address the conflict fell apart in the waning days of his first administration.
-
-Under Widodo’s second administration since 2019, Papuan grievances have intensified. Instead of the root causes of the conflict, the state has focused chiefly on development and infrastructure programmes, including the Trans Papua highway that’s under construction in some regencies in West Papua, a food estate, a special economic zone, strategic tourism areas and palm oil plantations.
+> When Joko Widodo became Indonesia’s president in 2014, there was hope for a resolution to the crisis. He released a handful of Papuan political prisoners and vowed to address the 2014 Paniai human rights abuse case, relating to an incident where the Indonesian army fired on hundreds of Papuan protesters, killed four teenagers, and wounded more than a dozen others in highland Papua. A promise to open West Papua to foreign journalists was seen by many as another sign of Widodo’s goodwill.
+>
+> However, the commitment to address the conflict fell apart in the waning days of his first administration.
+>
+> Under Widodo’s second administration since 2019, Papuan grievances have intensified. Instead of the root causes of the conflict, the state has focused chiefly on development and infrastructure programmes, including the Trans Papua highway that’s under construction in some regencies in West Papua, a food estate, a special economic zone, strategic tourism areas and palm oil plantations.
 
 The issues in Papua are of critical importance due to their significant humanitarian and socio-political implications. The frequent violence has stunted the region’s development, hindered economic growth, and caused long-term social fragmentation. However, despite the severity of the situation, Papua often remains underreported on a global scale. Understanding the drivers and geography of conflict in this region can pave the way for more effective peacebuilding. What makes this problem particularly interesting—and difficult to solve—is the intersection of spatial, political, and socioeconomic complexities. Armed conflict data for Papua is not only vast but also deeply interwoven with factors such as ethnic diversity and cultural practices.
 
@@ -54,7 +56,7 @@ Although these studies produced useful insights on the factors that may contribu
 
 # 3. Approach
 
-Our application will have the following features:
+Our application has the following features:
 
 ## 3.1 Exploratory Data Analysis
 
@@ -88,7 +90,7 @@ Our application will have the following features:
 
     They will also be able to choose a:
 
-    -   Bandwidth selection method (bw.diggle, bw.CvL, bw.scott, bw.ppl, or adaptive bandwidth)
+    -   Bandwidth selection method (bw.diggle, bw.CvL, bw.scott, bw.ppl, and fixed or adaptive bandwidth)
 
     -   Smoothing kernel method (Gaussian, Epanechnikov, Quartic, or Disc)
 
@@ -98,30 +100,27 @@ Our application will have the following features:
 
     -   F-function
 
-    -   K-function
-
-    -   L-function
-
         They will also be able to specify the edge correction to be applied and the number of simulations to be generated in the Monte Carlo test.
 
 ## 3.3 Spatiotemporal Point Patterns Analysis: 1st and 2nd Order
 
--   Users will be able to derive quarterly or monthly spatiotemporal kernel density estimation (STKDE) layers for armed conflict point events in their chosen study area, which will be displayed in a single animation.
-
--   Users will be able to compute and visualise the space-time inhomogeneous K-function for their chosen study area, which will allow them to assess the spatiotemporal aggregation or regularity of the point process.
+-   Users will be able to derive quarterly spatiotemporal kernel density estimation (STKDE) layers for armed conflict point events in their chosen study area, which will be displayed in a single animation.
 
 # 4. Data
 
 We will be using data from the following sources in our application, after appropriate processing.
 
-| Data | Source | Description |
-|-----------------------|------------------|-------------------------------|
-| Armed conflict events in Indonesia | [ACLED](https://acleddata.com/data-export-tool/) | Data in csv format, providing location, date, and other attribute information on 6 types of armed conflict events in Indonesia occurring from 1 January 2015 to 30 June 2024. |
-| Administrative boundaries of Indonesia | [Humanitarian Data Exchange](https://data.humdata.org/dataset/cod-ab-idn?) | Polygon feature data in ESRI shapefile format, providing information on Indonesia's subnational administrative level 1 (provinsi/province) and level 2 (kota, kabupaten / city, regency) boundaries. |
++----------------------------------------+-----------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Data                                   | Source                                                                                                          | Description                                                                                                                                                                   |
++========================================+=================================================================================================================+===============================================================================================================================================================================+
+| Armed conflict events in Indonesia     | [ACLED](https://acleddata.com/data-export-tool/)                                                                | Data in csv format, providing location, date, and other attribute information on 6 types of armed conflict events in Indonesia occurring from 1 January 2015 to 30 June 2024. |
++----------------------------------------+-----------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Administrative boundaries of Indonesia | [Indonesia Geospasial](https://www.indonesia-geospasial.com/2023/05/download-shapefile-batas-administrasi.html) | Polygon feature data in ESRI shapefile format, providing information on Indonesia's subnational boundaries as of 2023.                                                        |
++----------------------------------------+-----------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 # 5. R Packages
 
-We will use the following R packages for our application.
+We used functions from the following R packages in preparing our application and pre-processed data.
 
 -   [**shiny**](https://shiny.posit.co/), a package that makes it easy to build interactive web apps straight from R.
 
@@ -135,7 +134,27 @@ We will use the following R packages for our application.
 
 -   [**sparr**](https://cran.r-project.org/web/packages/sparr/index.html), which provides functions to estimate kernel-smoothed spatial and spatio-temporal densities and relative risk functions, and perform subsequent inference.
 
--   [**stpp**](https://cran.r-project.org/web/packages/stpp/index.html), which provides statistical tools for analyzing the global and local second-order properties of spatio-temporal point processes, including estimators of the space-time inhomogeneous K-function and pair correlation function.
+-   [**sfdep**](https://cran.r-project.org/web/packages/sfdep/index.html),an interface to 'spdep' to integrate with 'sf' objects and the 'tidyverse'.
+
+-   [**plotly**](https://cran.r-project.org/web/packages/plotly/index.html), to create interactive web graphics from 'ggplot2' graphs.
+
+-   [**zoo**](https://cran.r-project.org/web/packages/zoo/index.html), an S3 class with methods for totally ordered indexed observations. It is particularly aimed at irregular time series of numeric vectors/matrices and factors. zoo's key design goals are independence of a particular index/date/time class and consistency with ts and base R by providing methods to extend standard generics.
+
+-   [**tmaptools**](https://cran.r-project.org/web/packages/tmaptools/index.html), a set of tools for reading and processing spatial data. The aim is to supply the workflow to create thematic maps. This package also facilitates 'tmap', the package for visualizing thematic maps.
+
+-   [**raster**](https://cran.r-project.org/web/packages/raster/index.html), for reading, writing, manipulating, analyzing and modeling of spatial data.
+
+-   [**shinydashboard**](https://cran.r-project.org/web/packages/shinydashboard/index.html), to create dashboards with 'Shiny'. This package provides a theme on top of 'Shiny', making it easy to create attractive dashboards.
+
+-   [**shinythemes**](https://cran.r-project.org/web/packages/shinythemes/index.html), which provides themes for use with Shiny.
+
+-   [**bslib**](https://cran.r-project.org/web/packages/bslib/index.html), which simplifies custom 'CSS' styling of both 'shiny' and 'rmarkdown' via 'Bootstrap' 'Sass'.
+
+-   [**viridis**](https://cran.r-project.org/web/packages/viridis/index.html), a package for creating color maps designed to improve graph readability for readers with common forms of color blindness and/or color vision deficiency.
+
+-   [**magick**](https://cran.r-project.org/web/packages/magick/index.html), bindings to 'ImageMagick': the most comprehensive open-source image processing library available. Supports many common formats (png, jpeg, tiff, pdf, etc) and manipulations (rotate, scale, crop, trim, flip, blur, etc).
+
+-   [**rmapshaper**](https://cran.r-project.org/web/packages/rmapshaper/index.html), to edit and simplify 'geojson', 'Spatial', and 'sf' objects.
 
 # 6. Storyboard
 
@@ -149,4 +168,24 @@ We will use the following R packages for our application.
 
 ## Spatiotemporal Point Patterns Analysis Page
 
-# ![](images/STKDE-01.png)
+![](images/STKDE-01.png)
+
+# 7. **Project Team Responsibilities**
+
+The table below shows each member's role throughout the project
+
++----------------------------------+------------------------------------------------------+
+| Member                           | Responsibilities                                     |
++==================================+======================================================+
+| Samuel                           | -   Spatial Point Patterns Analysis module           |
++----------------------------------+------------------------------------------------------+
+| Lucas                            | -   Spatiotemporal Point Patterns Analysis module    |
+|                                  |                                                      |
+|                                  | -   Setting up project Netlify and Github repository |
++----------------------------------+------------------------------------------------------+
+| Immanuel                         | -   Data sourcing and wrangling                      |
+|                                  |                                                      |
+|                                  | -   Exploratory Data Analysis module                 |
+|                                  |                                                      |
+|                                  | -   Setting up integrated Shiny application          |
++----------------------------------+------------------------------------------------------+

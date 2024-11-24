@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-11-11">
+
+<title>Data Wrangling – IS415</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">IS415</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../pages/proposal.html"> 
+<span class="menu-text">Project Overview</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../pages/data_wrangling.html" aria-current="page"> 
+<span class="menu-text">Data Wrangling</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://docs.google.com/document/d/1WAmdhcvjw7V_B4deXYkG3NksPox55hJTpmKSp5yUu_k/edit?usp=sharing"> 
+<span class="menu-text">User Guide</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://kyleong.shinyapps.io/Shiny_Project/"> 
+<span class="menu-text">Shiny App</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#data-wrangling-for-geospatial-analytics-shiny-application" id="toc-data-wrangling-for-geospatial-analytics-shiny-application" class="nav-link active" data-scroll-target="#data-wrangling-for-geospatial-analytics-shiny-application"><strong>Data Wrangling for Geospatial Analytics Shiny Application</strong></a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">1.0 Overview</a></li>
+  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages">2.0 Packages</a></li>
+  <li><a href="#preparing-geospatial-data" id="toc-preparing-geospatial-data" class="nav-link" data-scroll-target="#preparing-geospatial-data">3.0 Preparing geospatial data</a>
+  <ul class="collapse">
+  <li><a href="#importing-the-data-and-reprojecting-it" id="toc-importing-the-data-and-reprojecting-it" class="nav-link" data-scroll-target="#importing-the-data-and-reprojecting-it">3.0.1 Importing the data and reprojecting it</a></li>
+  <li><a href="#selecting-the-study-area" id="toc-selecting-the-study-area" class="nav-link" data-scroll-target="#selecting-the-study-area">3.0.2 Selecting the study area</a></li>
+  </ul></li>
+  <li><a href="#preparing-the-admin1-and-admin2-layers" id="toc-preparing-the-admin1-and-admin2-layers" class="nav-link" data-scroll-target="#preparing-the-admin1-and-admin2-layers">3.1 Preparing the admin1 and admin2 layers</a>
+  <ul class="collapse">
+  <li><a href="#obtaining-admin2-boundaries" id="toc-obtaining-admin2-boundaries" class="nav-link" data-scroll-target="#obtaining-admin2-boundaries">3.1.1 Obtaining admin2 boundaries</a></li>
+  <li><a href="#obtaining-admin1-boundaries" id="toc-obtaining-admin1-boundaries" class="nav-link" data-scroll-target="#obtaining-admin1-boundaries">3.1.2 Obtaining admin1 boundaries</a></li>
+  </ul></li>
+  <li><a href="#preparing-point-events-data" id="toc-preparing-point-events-data" class="nav-link" data-scroll-target="#preparing-point-events-data">4.0 Preparing point events data</a>
+  <ul class="collapse">
+  <li><a href="#importing-the-data" id="toc-importing-the-data" class="nav-link" data-scroll-target="#importing-the-data">4.0.1 Importing the data</a></li>
+  <li><a href="#converting-and-reprojecting-the-data" id="toc-converting-and-reprojecting-the-data" class="nav-link" data-scroll-target="#converting-and-reprojecting-the-data">4.0.2 Converting and Reprojecting the Data</a></li>
+  <li><a href="#selecting-points-in-the-study-area" id="toc-selecting-points-in-the-study-area" class="nav-link" data-scroll-target="#selecting-points-in-the-study-area">4.0.3 Selecting Points in the Study Area</a></li>
+  <li><a href="#dealing-with-duplicate-points" id="toc-dealing-with-duplicate-points" class="nav-link" data-scroll-target="#dealing-with-duplicate-points">4.0.4 Dealing with Duplicate Points</a></li>
+  </ul></li>
+  <li><a href="#ensuring-consistency-in-area-names" id="toc-ensuring-consistency-in-area-names" class="nav-link" data-scroll-target="#ensuring-consistency-in-area-names">5.0 Ensuring Consistency in Area Names</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Data Wrangling</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 11, 2024</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">November 24, 2024</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="data-wrangling-for-geospatial-analytics-shiny-application" class="level1">
+<h1><strong>Data Wrangling for Geospatial Analytics Shiny Application</strong></h1>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">1.0 Overview</h2>
+<p>We prepare the following data layers:</p>
+<ul>
+<li><p>A study area layer in sf polygon feature format, at Indonesia’s admin1 (provinsi/province) level.</p></li>
+<li><p>A study area layer in sf polygon feature format, at Indonesia’s admin2 (kota &amp; kabupaten/city &amp; regency) level.</p></li>
+<li><p>A point events layer in sf point feature format, showing the location, date and other attributes of armed conflict events in the Papua region.</p></li>
+</ul>
+</section>
+<section id="packages" class="level2">
+<h2 class="anchored" data-anchor-id="packages">2.0 Packages</h2>
+<p>The following R packages are used:</p>
+<ul>
+<li><p><a href="https://cran.r-project.org/web/packages/tidyverse/index.html"><strong>tidyverse</strong></a>, a collection of R packages designed for data science, and which provides functions to import, transform, and visualise the data.</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/sf/index.html"><strong>sf</strong></a>, to import, manage and process vector-based geospatial data in R.</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/tmap/index.html"><strong>tmap</strong></a>, which provides functions for plotting cartographic quality static point patterns maps or interactive maps.</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/spatstat/index.html"><strong>spatstat</strong></a>, a comprehensive open-source toolbox for analysing Spatial Point Patterns.</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/rmapshaper/index.html"><strong>rmapshaper</strong></a>, a package for editing and simplifying sf objects.</p></li>
+</ul>
+<p><em>p_load()</em> function of pacman package is used to install and load these packages into the R environment.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, sf, tmap, spatstat, rmapshaper)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="preparing-geospatial-data" class="level2">
+<h2 class="anchored" data-anchor-id="preparing-geospatial-data">3.0 Preparing geospatial data</h2>
+<section id="importing-the-data-and-reprojecting-it" class="level3">
+<h3 class="anchored" data-anchor-id="importing-the-data-and-reprojecting-it">3.0.1 Importing the data and reprojecting it</h3>
+<p>Import <code>Batas_Wilayah_KelurahanDesa_10K_AR</code> as a simple features object, which we name <code>admin</code>. This dataset provides information on Indonesia’s admin4 (village/desa and kelurahan) administrative boundaries as of 2023.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>admin <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="at">dsn =</span> <span class="st">"data/BATAS WILAYAH KELURAHAN-DESA 10K"</span>, <span class="at">layer =</span> <span class="st">"Batas_Wilayah_KelurahanDesa_10K_AR"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(admin)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We also observe that <code>admin</code> is projected in WGS 84.</p>
+<p>Sometimes, when importing geospatial data into R, the coordinate system of the source data is wrongly assigned during the importing process. We check the CRS.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(admin)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The EPSG code indicated is 4326, which is correct since the data is projected in WGS 84.</p>
+</section>
+<section id="selecting-the-study-area" class="level3">
+<h3 class="anchored" data-anchor-id="selecting-the-study-area">3.0.2 Selecting the study area</h3>
+<p><code>admin</code> contains 83518 features, each representing a village. However, for our study, we only require the data for villages in the Papua region, which consists of 6 provinces (as of 2023): Papua Selatan (South Papua), Papua Tengah (Central Papua), Papua Pegunungan (Mountains Papua), Papua Barat Daya (South-West Papua), Papua Barat (West Papua), and Papua.</p>
+<p>The WADMPR field of <code>admin</code> contains the name of the province that each village belongs to.</p>
+<p>All the provinces in the Papua region have the word “Papua” in their names. In the following code chunk, we extract the rows of <code>admin</code> that contain the word “Papua” in the WADMPR field and save them as a new object <code>papua</code>.</p>
+<p><em>grepl()</em> of base R is used to obtain a logical vector indicating whether each element of <code>admin$WADMPR</code> contains a match to the word “Papua”. Then, <em>filter()</em> of <strong>dplyr</strong> (part of the <strong>tidyverse</strong>) is used to retain only the corresponding rows of <code>admin_</code>. Next, <em>rename()</em> of <strong>dplyr</strong> is used to rename the WADMPR field to “Province”.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>papua <span class="ot">&lt;-</span> admin <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">"Papua"</span>, WADMPR, <span class="at">fixed =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Province =</span> WADMPR)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>papua</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>As required, <code>papua</code> is a sf polygon data.frame. It has 7374 features.</p>
+<p>Finally, we check whether geometries of all the features in <code>papua</code> are valid.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">which</span>(<span class="fu">st_is_valid</span>(papua) <span class="sc">==</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Only 7371 features have valid geometries, out of a total of 7374. Using <em>st_make_valid()</em> of <strong>sf</strong>, we make the invalid geometries valid. Next, we use <em>mutate()</em> of <strong>dplyr</strong> to replace the existing geometry column with a new one containing the valid geometries. We save the result as a new sf polygon data.frame, <code>papua_cleaned</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>papua_cleaned <span class="ot">&lt;-</span> papua <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">geometry =</span> <span class="fu">st_make_valid</span>(geometry))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">which</span>(<span class="fu">st_is_valid</span>(papua_cleaned) <span class="sc">==</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>papua_cleaned</code> is projected in WGS 84. In this code chunk, we reproject it in the projected coordinate system in the DGN95 / UTM zone 53S coordinate system, and save the reprojected data as a new object <code>papua_23883</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>papua_23883 <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(papua_cleaned, <span class="at">crs =</span> <span class="dv">23883</span>) </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">st_geometry</span>(papua_23883)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="preparing-the-admin1-and-admin2-layers" class="level2">
+<h2 class="anchored" data-anchor-id="preparing-the-admin1-and-admin2-layers">3.1 Preparing the admin1 and admin2 layers</h2>
+<section id="obtaining-admin2-boundaries" class="level3">
+<h3 class="anchored" data-anchor-id="obtaining-admin2-boundaries">3.1.1 Obtaining admin2 boundaries</h3>
+<p>The WADMKK field of <code>papua_cleaned</code> contains the name of each city/regency that each village belongs to.</p>
+<p>We first use <em>rename()</em> of dplyr to rename the WADMKK field to “City/Regency”. Next, we use <em>group_by()</em> of <strong>dplyr</strong> to group the different villages according to the province as well as city/regency they belong in. Then, we use <em>summarise()</em> of <strong>dplyr</strong> and <em>st_union()</em> of <strong>sf</strong> to combine the geometries of the different villages within each city/regency and dissolve the boundaries between villages, thus obtaining the admin2 (city/regency) level boundaries. Finally, we use <em>ms_simplify()</em> of <strong>rmapshaper</strong> to simplify the polygons, using the Visvalingam algorithm.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>papua_adm2 <span class="ot">&lt;-</span> papua_23883 <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">`</span><span class="at">City/Regency</span><span class="st">`</span> <span class="ot">=</span> WADMKK) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Province, <span class="st">`</span><span class="at">City/Regency</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">geometry =</span> <span class="fu">st_union</span>(geometry)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ms_simplify</span>()</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>papua_adm2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can now save the <code>papua_adm2</code> study area layer using <em>write_rds()</em> of <strong>readr</strong>, part of the <strong>tidyverse</strong><em>.</em></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_rds</span>(papua_adm2, <span class="st">"data/rds/papua_adm2.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We visualise the admin2 boundaries in <code>papua_adm2</code> using <em>plot()</em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(papua_adm2[<span class="st">"City/Regency"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="data_wrangling_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="obtaining-admin1-boundaries" class="level3">
+<h3 class="anchored" data-anchor-id="obtaining-admin1-boundaries">3.1.2 Obtaining admin1 boundaries</h3>
+<p>Now, we can use <em>group_by()</em> of <strong>dplyr</strong> to group the different cities/regencies according to the province they belong in. Then, we use <em>summarise()</em> of <strong>dplyr</strong> and <em>st_union()</em> of <strong>sf</strong> to combine the geometries of the different cities/regencies within each province and dissolve the boundaries between them, thus obtaining the admin1 (province) level boundaries.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>papua_adm1 <span class="ot">&lt;-</span> papua_adm2 <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Province) <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">geometry =</span> <span class="fu">st_union</span>(geometry))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can now save the <code>papua_adm1</code> study area layer using the <em>write_rds()</em> function of <strong>readr</strong>, part of the <strong>tidyverse</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_rds</span>(papua_adm1, <span class="st">"data/rds/papua_adm1.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(papua_adm1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="data_wrangling_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="preparing-point-events-data" class="level2">
+<h2 class="anchored" data-anchor-id="preparing-point-events-data">4.0 Preparing point events data</h2>
+<section id="importing-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="importing-the-data">4.0.1 Importing the data</h3>
+<p>We import <code>2015-01-01-2024-06-30-Indonesia.csv</code>. This dataset provides location, date, and other attribute information on 6 types of armed conflict events in Indonesia occurring from 1 January 2015 to 30 June 2024. Since it is in csv format, we use the <em>read_csv()</em> function of <strong>readr</strong>, part of the <strong>tidyverse</strong>, to import it, and save it as an object named <code>points</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>points <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/2015-01-01-2024-06-30-Indonesia.csv"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(points)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 17,116
+Columns: 31
+$ event_id_cnty      &lt;chr&gt; "IDN17267", "IDN17269", "IDN17293", "IDN17428", "ID…
+$ event_date         &lt;chr&gt; "30 June 2024", "30 June 2024", "30 June 2024", "30…
+$ year               &lt;dbl&gt; 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 202…
+$ time_precision     &lt;dbl&gt; 1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+$ disorder_type      &lt;chr&gt; "Political violence", "Demonstrations", "Demonstrat…
+$ event_type         &lt;chr&gt; "Violence against civilians", "Protests", "Protests…
+$ sub_event_type     &lt;chr&gt; "Attack", "Peaceful protest", "Peaceful protest", "…
+$ actor1             &lt;chr&gt; "Military Forces of Indonesia (2014-)", "Protesters…
+$ assoc_actor_1      &lt;chr&gt; NA, "AJI: Alliance of Independent Journalists; Jour…
+$ inter1             &lt;chr&gt; "State forces", "Protesters", "Protesters", "Rebel …
+$ actor2             &lt;chr&gt; "Civilians (Indonesia)", NA, NA, NA, NA, "Civilians…
+$ assoc_actor_2      &lt;chr&gt; "TPNPB: West Papua National Liberation Army", NA, N…
+$ inter2             &lt;chr&gt; "Civilians", NA, NA, NA, NA, "Civilians", NA, "Stat…
+$ interaction        &lt;chr&gt; "State forces-Civilians", "Protesters only", "Prote…
+$ civilian_targeting &lt;chr&gt; "Civilian targeting", NA, NA, NA, NA, "Civilian tar…
+$ iso                &lt;dbl&gt; 360, 360, 360, 360, 360, 360, 360, 360, 360, 360, 3…
+$ region             &lt;chr&gt; "Southeast Asia", "Southeast Asia", "Southeast Asia…
+$ country            &lt;chr&gt; "Indonesia", "Indonesia", "Indonesia", "Indonesia",…
+$ admin1             &lt;chr&gt; "Central Papua", "Jakarta", "East Java", "West Java…
+$ admin2             &lt;chr&gt; "Intan Jaya", "Central Jakarta", "Surabaya", "Bogor…
+$ admin3             &lt;chr&gt; "Sugapa", "Gambir", "Genteng", "Central Bogor", "Re…
+$ location           &lt;chr&gt; "Sugapa", "Jakarta - Central", "Surabaya", "Bogor",…
+$ latitude           &lt;dbl&gt; -3.7430, -6.1806, -7.2492, -6.5944, -6.9222, 3.5833…
+$ longitude          &lt;dbl&gt; 137.0500, 106.8283, 112.7510, 106.7891, 107.6070, 9…
+$ geo_precision      &lt;dbl&gt; 2, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+$ source             &lt;chr&gt; "Human Rights Monitor", "Kompas", "Tribunnews", "Ko…
+$ source_scale       &lt;chr&gt; "Other", "National", "National", "National", "Natio…
+$ notes              &lt;chr&gt; "On 30 June 2024, the Indonesian military forces ar…
+$ fatalities         &lt;dbl&gt; 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+$ tags               &lt;chr&gt; NA, "crowd size=no report", "crowd size=no report",…
+$ timestamp          &lt;dbl&gt; 1720552459, 1720552459, 1720552459, 1721769310, 172…</code></pre>
+</div>
+</div>
+</section>
+<section id="converting-and-reprojecting-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="converting-and-reprojecting-the-data">4.0.2 Converting and Reprojecting the Data</h3>
+<p>The longitude and latitude fields capture the x- and y-coordinates of the data points respectively. They appear to be in the WGS 84 geographic coordinate system (in which latitudes range from -90 to 90 and longitudes range from 0 to 360).</p>
+<p>We convert <code>points</code> to an sf object.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>points_sf <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(points, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"longitude"</span>,<span class="st">"latitude"</span>), <span class="at">crs =</span> <span class="dv">4326</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">st_geometry</span>(points_sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Geometry set for 17116 features 
+Geometry type: POINT
+Dimension:     XY
+Bounding box:  xmin: 95.2127 ymin: -10.7323 xmax: 140.8694 ymax: 5.8925
+Geodetic CRS:  WGS 84
+First 5 geometries:</code></pre>
+</div>
+</div>
+<p>We reproject <code>points_sf</code> in the DGN95 / UTM zone 53S coordinate system, and save the reprojected data as a new object <code>points_23883</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>points_23883 <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(points_sf, <span class="at">crs =</span> <span class="dv">23883</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">st_geometry</span>(points_23883)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Geometry set for 17116 features 
+Geometry type: POINT
+Dimension:     XY
+Bounding box:  xmin: -4304403 ymin: 8787709 xmax: 1153416 ymax: 10846150
+Projected CRS: DGN95 / UTM zone 53S
+First 5 geometries:</code></pre>
+</div>
+</div>
+</section>
+<section id="selecting-points-in-the-study-area" class="level3">
+<h3 class="anchored" data-anchor-id="selecting-points-in-the-study-area">4.0.3 Selecting Points in the Study Area</h3>
+<p><code>points_23883</code> provides information on armed conflict events throughout Indonesia, and the admin1 field contains the name of the province where each point event took place.</p>
+<p>As mentioned earlier, our study area is the region of Papua, consisting of 6 provinces. 4 of these, namely Papua Selatan (South Papua), Papua Tengah (Central Papua), Papua Pegunungan (Highland Papua), Papua Barat Daya (Southwest Papua), were only created in <a href="https://unstats.un.org/unsd/ungegn/sessions/3rd_session_2023/documents/GEGN.2_2023_50_CRP50.pdf">2022</a>, when they were carved out of the original 2 provinces of Papua and Papua Barat (West Papua).</p>
+<p>We use <em>filter()</em> and <em>grepl()</em> to extract only the armed conflict events that take place in provinces containing the word “Papua” from <code>points_23883</code>. In addition, we use <em>select()</em>, also part of <strong>dplyr</strong>, to retain only the fields containing the event date, event type, involved parties (actor 1 and actor 2), the province (admin 1) and regency/city (admin2) where the event occurred, the number of fatalities, notes about the event, and the point geometry, for each event.</p>
+<p>Lastly, we use <em>mutate()</em> from <strong>dplyr</strong> and <em>dmy()</em> of base R to convert the values in the event_date field to Date class.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>points_study <span class="ot">&lt;-</span> points_23883 <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">grepl</span>(<span class="st">"Papua"</span>, admin1, <span class="at">fixed =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(event_date, event_type, actor1, actor2, admin1, admin2, fatalities, notes, geometry) <span class="sc">%&gt;%</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">event_date =</span> <span class="fu">dmy</span>(event_date))</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>points_study</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 2942 features and 8 fields
+Geometry type: POINT
+Dimension:     XY
+Bounding box:  xmin: -23320.68 ymin: 9056317 xmax: 1153416 ymax: 9956392
+Projected CRS: DGN95 / UTM zone 53S
+# A tibble: 2,942 × 9
+   event_date event_type            actor1 actor2 admin1 admin2 fatalities notes
+ * &lt;date&gt;     &lt;chr&gt;                 &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;
+ 1 2024-06-30 Violence against civ… Milit… Civil… Centr… Intan…          1 On 3…
+ 2 2024-06-29 Strategic developmen… Civil… &lt;NA&gt;   Centr… Puncak          0 Disp…
+ 3 2024-06-29 Battles               TPNPB… Milit… Centr… Puncak          1 On 2…
+ 4 2024-06-28 Protests              Prote… &lt;NA&gt;   Papua  Jayap…          0 On 2…
+ 5 2024-06-28 Protests              Prote… &lt;NA&gt;   South… Sorong          0 On 2…
+ 6 2024-06-28 Battles               TPNPB… Milit… Centr… Puncak          0 On 2…
+ 7 2024-06-27 Protests              Prote… &lt;NA&gt;   South… South…          0 On 2…
+ 8 2024-06-27 Protests              Prote… &lt;NA&gt;   Papua  Jayap…          0 On 2…
+ 9 2024-06-22 Battles               Milit… TPNPB… South… Maybr…          0 On 2…
+10 2024-06-22 Protests              Prote… &lt;NA&gt;   Papua  Jayap…          0 On 2…
+# ℹ 2,932 more rows
+# ℹ 1 more variable: geometry &lt;POINT [m]&gt;</code></pre>
+</div>
+</div>
+<p>There are 2942 features in the <code>points_study</code> sf point data.frame, corresponding to 2942 armed conflict point events.</p>
+<p>We verify that the geometries of all the point events are valid.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">which</span>(<span class="fu">st_is_valid</span>(points_study) <span class="sc">==</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2942</code></pre>
+</div>
+</div>
+</section>
+<section id="dealing-with-duplicate-points" class="level3">
+<h3 class="anchored" data-anchor-id="dealing-with-duplicate-points">4.0.4 Dealing with Duplicate Points</h3>
+<p>In spatial point patterns analysis, a significant issue is the presence of duplicates. The statistical methodology used for spatial points patterns processes is based largely on the assumption that processes are simple, that the points cannot be coincident.</p>
+<p>To check for duplicate points in <code>points_study</code>, we use the following code chunk:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(<span class="fu">duplicated</span>(points_study<span class="sc">$</span>geometry))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p>To tackle this problem, we use <em>st_jitter()</em> of <strong>sf</strong> to slightly shift the duplicate points by 10 meters each such that they no longer occur at the same point, to make them unique.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>points_study_jitter <span class="ot">&lt;-</span> points_study <span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_jitter</span>(<span class="at">amount =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="ensuring-consistency-in-area-names" class="level2">
+<h2 class="anchored" data-anchor-id="ensuring-consistency-in-area-names">5.0 Ensuring Consistency in Area Names</h2>
+<p>In <code>papua_adm1</code> and <code>papua_adm2</code>, the province and city/regency names appear to be in Bahasa Indonesia. On the other hand, in the admin1 and admin2 fields of <code>points_study</code>, the names given are in English.</p>
+<p>The following code chunk uses <em>filter()</em>, <em>group_by()</em> and <em>summarize()</em> of <strong>dplyr</strong> to identify the English-language province names in <code>points_study_jitter</code> that are different from the Bahasa Indonesia names in <code>papua_adm1</code>, and vice versa.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>points_study_jitter <span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>(admin1 <span class="sc">%in%</span> papua_adm1<span class="sc">$</span>Province)) <span class="sc">%&gt;%</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(admin1) <span class="sc">%&gt;%</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 5 features and 1 field
+Geometry type: MULTIPOINT
+Dimension:     XY
+Bounding box:  xmin: -23323.36 ymin: 9056307 xmax: 1149980 ymax: 9956383
+Projected CRS: DGN95 / UTM zone 53S
+# A tibble: 5 × 2
+  admin1                                                                geometry
+  &lt;chr&gt;                                                         &lt;MULTIPOINT [m]&gt;
+1 Central Papua   ((509633.3 9625055), (548483.5 9624829), (548483.9 9624835), …
+2 Highland Papua  ((799229.9 9492617), (815137.3 9535327), (815462.5 9508162), …
+3 South Papua     ((847413.8 9386172), (847415.2 9386177), (847415.9 9386180), …
+4 Southwest Papua ((-23323.36 9777960), (34593.1 9953391), (34607 9953383), (81…
+5 West Papua      ((199616.3 9676358), (199616.4 9676347), (199618.8 9676360), …</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>papua_adm1 <span class="sc">%&gt;%</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>(Province <span class="sc">%in%</span> points_study_jitter<span class="sc">$</span>admin1)) <span class="sc">%&gt;%</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Province) <span class="sc">%&gt;%</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 5 features and 1 field
+Geometry type: GEOMETRY
+Dimension:     XY
+Bounding box:  xmin: -135197 ymin: 8985733 xmax: 1167404 ymax: 10119770
+Projected CRS: DGN95 / UTM zone 53S
+# A tibble: 5 × 2
+  Province                                                              geometry
+  &lt;chr&gt;                                                           &lt;GEOMETRY [m]&gt;
+1 Papua Barat      MULTIPOLYGON (((257409.2 9566412, 257428.4 9566326, 256937.4…
+2 Papua Barat Daya MULTIPOLYGON (((-87979.27 9792818, -88115.85 9792918, -88128…
+3 Papua Pegunungan POLYGON ((941726.2 9472843, 941327.6 9472931, 940247.6 94728…
+4 Papua Selatan    MULTIPOLYGON (((885530.8 9077392, 885418.5 9077170, 885388.7…
+5 Papua Tengah     MULTIPOLYGON (((522662 9507146, 522824.3 9506943, 522629 950…</code></pre>
+</div>
+</div>
+<p>Next, we use <em>mutate()</em> of <strong>dplyr</strong> and <em>str_replace_all()</em> of <strong>stringr</strong> (also part of the <strong>tidyverse</strong>) to replace the English-language names in <code>points_study</code> with the Bahasa Indonesia equivalents from <code>papua_adm1</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>points_study1 <span class="ot">&lt;-</span> points_study_jitter <span class="sc">%&gt;%</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">admin1 =</span> <span class="fu">str_replace_all</span>(admin1, <span class="fu">c</span>(<span class="st">"Central Papua"</span> <span class="ot">=</span> <span class="st">"Papua Tengah"</span>, <span class="st">"Highland Papua"</span> <span class="ot">=</span> <span class="st">"Papua Pegunungan"</span>, <span class="st">"South Papua"</span> <span class="ot">=</span> <span class="st">"Papua Selatan"</span>, <span class="st">"Southwest Papua"</span> <span class="ot">=</span> <span class="st">"Papua Barat Daya"</span>, <span class="st">"West Papua"</span> <span class="ot">=</span> <span class="st">"Papua Barat"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, we use <em>filter()</em>, <em>group_by()</em> and <em>summarize()</em> of <strong>dplyr</strong> again to identify the city/regency names in <code>points_study1</code> that are different from the Bahasa Indonesia names in <code>papua_adm2</code>, and vice versa.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>points_study1 <span class="sc">%&gt;%</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>(admin2 <span class="sc">%in%</span> papua_adm2<span class="sc">$</span><span class="st">`</span><span class="at">City/Regency</span><span class="st">`</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(admin2) <span class="sc">%&gt;%</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 5 features and 1 field
+Geometry type: MULTIPOINT
+Dimension:     XY
+Bounding box:  xmin: 148961.1 ymin: 9593967 xmax: 951799.2 ymax: 9867860
+Projected CRS: DGN95 / UTM zone 53S
+# A tibble: 5 × 2
+  admin2                                                                geometry
+  &lt;chr&gt;                                                         &lt;MULTIPOINT [m]&gt;
+1 Central Mamberamo ((951786 9593984), (951790.2 9593972), (951792.7 9593974), …
+2 Fakfak            ((199616.3 9676358), (199616.4 9676347), (199618.8 9676360)…
+3 South Manokwari   ((407185.2 9833544), (407187 9833534), (407189.5 9833533), …
+4 South Sorong      ((148961.1 9842817), (151801.5 9837437), (164414.4 9860473)…
+5 Yapen Islands     ((602125.8 9805478), (602136 9805475), (607100.1 9801749), …</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>papua_adm2 <span class="sc">%&gt;%</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>(<span class="st">`</span><span class="at">City/Regency</span><span class="st">`</span> <span class="sc">%in%</span> points_study1<span class="sc">$</span>admin2)) <span class="sc">%&gt;%</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="st">`</span><span class="at">City/Regency</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 8 features and 1 field
+Geometry type: GEOMETRY
+Dimension:     XY
+Bounding box:  xmin: 75213.72 ymin: 9561238 xmax: 1168500 ymax: 10103670
+Projected CRS: DGN95 / UTM zone 53S
+# A tibble: 8 × 2
+  `City/Regency`                                                        geometry
+  &lt;chr&gt;                                                           &lt;GEOMETRY [m]&gt;
+1 Fak Fak           MULTIPOLYGON (((177915.4 9672819, 177758.2 9672809, 177621.…
+2 Kepulauan Yapen   MULTIPOLYGON (((552706.1 9814300, 552956.7 9814289, 553283.…
+3 Kota Jayapura     MULTIPOLYGON (((1168366 9684435, 1168420 9691385, 1168500 9…
+4 Kota Sorong       MULTIPOLYGON (((83597.88 9894877, 83682.29 9894911, 83547.5…
+5 Mamberamo Tengah  POLYGON ((903830.1 9582811, 904487.2 9583295, 904744.8 9583…
+6 Manokwari Selatan POLYGON ((354405.2 9830783, 354512.5 9830718, 354861 983063…
+7 Sorong Selatan    MULTIPOLYGON (((141431.6 9825800, 142083.3 9825339, 141791.…
+8 Supiori           MULTIPOLYGON (((548701 9904498, 548579.1 9904430, 548618.9 …</code></pre>
+</div>
+</div>
+<p>We use <em>mutate()</em> of <strong>dplyr</strong> and <em>str_replace_all()</em> of <strong>stringr</strong> to replace the names in <code>points_study1</code> with the corresponding equivalents from <code>papua_adm2</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>points_study_final <span class="ot">&lt;-</span> points_study1 <span class="sc">%&gt;%</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">admin2 =</span> <span class="fu">str_replace_all</span>(admin2, <span class="fu">c</span>(<span class="st">"Central Mamberamo"</span> <span class="ot">=</span> <span class="st">"Mamberamo Tengah"</span>, <span class="st">"Fakfak"</span> <span class="ot">=</span> <span class="st">"Fak Fak"</span>, <span class="st">"South Manokwari"</span> <span class="ot">=</span> <span class="st">"Manokwari Selatan"</span>, <span class="st">"South Sorong"</span> <span class="ot">=</span> <span class="st">"Sorong Selatan"</span>, <span class="st">"Yapen Islands"</span> <span class="ot">=</span> <span class="st">"Kepulauan Yapen"</span>)))</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>points_study_final</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 2942 features and 8 fields
+Geometry type: POINT
+Dimension:     XY
+Bounding box:  xmin: -23323.36 ymin: 9056307 xmax: 1153416 ymax: 9956383
+Projected CRS: DGN95 / UTM zone 53S
+# A tibble: 2,942 × 9
+   event_date event_type            actor1 actor2 admin1 admin2 fatalities notes
+ * &lt;date&gt;     &lt;chr&gt;                 &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;
+ 1 2024-06-30 Violence against civ… Milit… Civil… Papua… Intan…          1 On 3…
+ 2 2024-06-29 Strategic developmen… Civil… &lt;NA&gt;   Papua… Puncak          0 Disp…
+ 3 2024-06-29 Battles               TPNPB… Milit… Papua… Puncak          1 On 2…
+ 4 2024-06-28 Protests              Prote… &lt;NA&gt;   Papua  Jayap…          0 On 2…
+ 5 2024-06-28 Protests              Prote… &lt;NA&gt;   Papua… Sorong          0 On 2…
+ 6 2024-06-28 Battles               TPNPB… Milit… Papua… Puncak          0 On 2…
+ 7 2024-06-27 Protests              Prote… &lt;NA&gt;   Papua… Soron…          0 On 2…
+ 8 2024-06-27 Protests              Prote… &lt;NA&gt;   Papua  Jayap…          0 On 2…
+ 9 2024-06-22 Battles               Milit… TPNPB… Papua… Maybr…          0 On 2…
+10 2024-06-22 Protests              Prote… &lt;NA&gt;   Papua  Jayap…          0 On 2…
+# ℹ 2,932 more rows
+# ℹ 1 more variable: geometry &lt;POINT [m]&gt;</code></pre>
+</div>
+</div>
+<p>We can now save the <code>points_study_final</code> layer using <em>write_rds()</em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_rds</span>(points_study_final, <span class="st">"data/rds/points_study_final.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can now plot all the layers using <strong>tmap</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">"plot"</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(papua_adm1) <span class="sc">+</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">col =</span> <span class="st">"MAP_COLORS"</span>) <span class="sc">+</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(papua_adm2) <span class="sc">+</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">col =</span> <span class="st">"MAP_COLORS"</span>) <span class="sc">+</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(points_study_final) <span class="sc">+</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="data_wrangling_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -8,7 +8,7 @@
 
 <meta name="dcterms.date" content="2024-10-13">
 
-<title>Project Proposal: Armed Conflict in Indonesia – IS415</title>
+<title>Project Overview: Armed Conflict in Indonesia – IS415</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -91,7 +91,19 @@ ul.task-list li input[type="checkbox"] {
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link active" href="../pages/proposal.html" aria-current="page"> 
-<span class="menu-text">Proposal</span></a>
+<span class="menu-text">Project Overview</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../pages/data_wrangling.html"> 
+<span class="menu-text">Data Wrangling</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://docs.google.com/document/d/1WAmdhcvjw7V_B4deXYkG3NksPox55hJTpmKSp5yUu_k/edit?usp=sharing"> 
+<span class="menu-text">User Guide</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://kyleong.shinyapps.io/Shiny_Project/"> 
+<span class="menu-text">Shiny App</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -109,7 +121,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">1.0 Introduction</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">1. Introduction</a>
   <ul class="collapse">
   <li><a href="#project-objectives" id="toc-project-objectives" class="nav-link" data-scroll-target="#project-objectives">Project Objectives</a></li>
   <li><a href="#project-features" id="toc-project-features" class="nav-link" data-scroll-target="#project-features">Project Features</a></li>
@@ -129,7 +141,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#spatial-point-patterns-analysis-page" id="toc-spatial-point-patterns-analysis-page" class="nav-link" data-scroll-target="#spatial-point-patterns-analysis-page">Spatial Point Patterns Analysis Page</a></li>
   <li><a href="#spatiotemporal-point-patterns-analysis-page" id="toc-spatiotemporal-point-patterns-analysis-page" class="nav-link" data-scroll-target="#spatiotemporal-point-patterns-analysis-page">Spatiotemporal Point Patterns Analysis Page</a></li>
   </ul></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><img src="images/STKDE-01.png" class="img-fluid"></a></li>
+  <li><a href="#project-team-responsibilities" id="toc-project-team-responsibilities" class="nav-link" data-scroll-target="#project-team-responsibilities">7. <strong>Project Team Responsibilities</strong></a></li>
   </ul>
 </nav>
     </div>
@@ -138,7 +150,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Project Proposal: Armed Conflict in Indonesia</h1>
+<h1 class="title">Project Overview: Armed Conflict in Indonesia</h1>
 </div>
 
 
@@ -167,16 +179,19 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">1.0 Introduction</h2>
+<section id="introduction" class="level1">
+<h1>1. Introduction</h1>
 <p>War. War never changes.</p>
 <p>The Romans waged war to gather slaves and wealth. Spain built an empire from its lust for gold and territory. Hitler shaped a battered Germany into an economic superpower.</p>
 <p>But war never changes.</p>
 <p>Armed conflicts have significant impacts on human security, development, and regional stability. Understanding the spatial and temporal dynamics of these conflicts is critical for policymakers, peacebuilders, and human rights advocates. We aim to visualise conflict trends, identify hotspots, and uncover patterns in our analysis of armed conflict in Indonesia. In particular, the Papua region has been a focal point of prolonged unrest, with political, ethnic, and economic tensions leading to recurring violence. Papua consists of 6 Indonesian provinces: Central Papua, Highland Papua, Papua, South Papua, Southwest Papua, and West Papua.</p>
 <p>The Papua conflict has been ongoing since 1962, between Indonesia and the OPM. By 2007, an estimated 100,000 to 300,000 Papuans have been killed by Indonesian forces, and countless more having experienced violence.</p>
+<p>As reported by <a href="https://www.aljazeera.com/opinions/2023/3/14/why-indonesia-is-losing-the-west-papua-conflict">Al Jazeera</a>:</p>
+<blockquote class="blockquote">
 <p>When Joko Widodo became Indonesia’s president in 2014, there was hope for a resolution to the crisis. He released a handful of Papuan political prisoners and vowed to address the 2014 Paniai human rights abuse case, relating to an incident where the Indonesian army fired on hundreds of Papuan protesters, killed four teenagers, and wounded more than a dozen others in highland Papua. A promise to open West Papua to foreign journalists was seen by many as another sign of Widodo’s goodwill.</p>
 <p>However, the commitment to address the conflict fell apart in the waning days of his first administration.</p>
 <p>Under Widodo’s second administration since 2019, Papuan grievances have intensified. Instead of the root causes of the conflict, the state has focused chiefly on development and infrastructure programmes, including the Trans Papua highway that’s under construction in some regencies in West Papua, a food estate, a special economic zone, strategic tourism areas and palm oil plantations.</p>
+</blockquote>
 <p>The issues in Papua are of critical importance due to their significant humanitarian and socio-political implications. The frequent violence has stunted the region’s development, hindered economic growth, and caused long-term social fragmentation. However, despite the severity of the situation, Papua often remains underreported on a global scale. Understanding the drivers and geography of conflict in this region can pave the way for more effective peacebuilding. What makes this problem particularly interesting—and difficult to solve—is the intersection of spatial, political, and socioeconomic complexities. Armed conflict data for Papua is not only vast but also deeply interwoven with factors such as ethnic diversity and cultural practices.</p>
 <p>This project thus aims to shed light on the conflict and inform intervention strategies, contributing to long-term peace and stability.</p>
 <section id="project-objectives" class="level3">
@@ -206,7 +221,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="approach" class="level1">
 <h1>3. Approach</h1>
-<p>Our application will have the following features:</p>
+<p>Our application has the following features:</p>
 <section id="exploratory-data-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="exploratory-data-analysis">3.1 Exploratory Data Analysis</h2>
 <ul>
@@ -234,15 +249,13 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Users will be able to derive kernel density estimation (KDE) layers for visualising the spatial intensity of armed conflict point events over a chosen study area, during a time period stipulated by them.</p>
 <p>They will also be able to choose a:</p>
 <ul>
-<li><p>Bandwidth selection method (bw.diggle, bw.CvL, bw.scott, bw.ppl, or adaptive bandwidth)</p></li>
+<li><p>Bandwidth selection method (bw.diggle, bw.CvL, bw.scott, bw.ppl, and fixed or adaptive bandwidth)</p></li>
 <li><p>Smoothing kernel method (Gaussian, Epanechnikov, Quartic, or Disc)</p></li>
 </ul></li>
 <li><p>Users will also be able to perform 2nd order spatial point patterns analysis on the armed conflict point events occurring within the chosen study area and time period, and conduct a Monte Carlo test of complete spatial randomness on the point process, using any of the following functions:</p>
 <ul>
 <li><p>G-function</p></li>
-<li><p>F-function</p></li>
-<li><p>K-function</p></li>
-<li><p>L-function</p>
+<li><p>F-function</p>
 <p>They will also be able to specify the edge correction to be applied and the number of simulations to be generated in the Monte Carlo test.</p></li>
 </ul></li>
 </ul>
@@ -250,8 +263,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="spatiotemporal-point-patterns-analysis-1st-and-2nd-order" class="level2">
 <h2 class="anchored" data-anchor-id="spatiotemporal-point-patterns-analysis-1st-and-2nd-order">3.3 Spatiotemporal Point Patterns Analysis: 1st and 2nd Order</h2>
 <ul>
-<li><p>Users will be able to derive quarterly or monthly spatiotemporal kernel density estimation (STKDE) layers for armed conflict point events in their chosen study area, which will be displayed in a single animation.</p></li>
-<li><p>Users will be able to compute and visualise the space-time inhomogeneous K-function for their chosen study area, which will allow them to assess the spatiotemporal aggregation or regularity of the point process.</p></li>
+<li>Users will be able to derive quarterly spatiotemporal kernel density estimation (STKDE) layers for armed conflict point events in their chosen study area, which will be displayed in a single animation.</li>
 </ul>
 </section>
 </section>
@@ -274,15 +286,15 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 <tr class="even">
 <td>Administrative boundaries of Indonesia</td>
-<td><a href="https://data.humdata.org/dataset/cod-ab-idn?">Humanitarian Data Exchange</a></td>
-<td>Polygon feature data in ESRI shapefile format, providing information on Indonesia’s subnational administrative level 1 (provinsi/province) and level 2 (kota, kabupaten / city, regency) boundaries.</td>
+<td><a href="https://www.indonesia-geospasial.com/2023/05/download-shapefile-batas-administrasi.html">Indonesia Geospasial</a></td>
+<td>Polygon feature data in ESRI shapefile format, providing information on Indonesia’s subnational boundaries as of 2023.</td>
 </tr>
 </tbody>
 </table>
 </section>
 <section id="r-packages" class="level1">
 <h1>5. R Packages</h1>
-<p>We will use the following R packages for our application.</p>
+<p>We used functions from the following R packages in preparing our application and pre-processed data.</p>
 <ul>
 <li><p><a href="https://shiny.posit.co/"><strong>shiny</strong></a>, a package that makes it easy to build interactive web apps straight from R.</p></li>
 <li><p><a href="https://www.tidyverse.org/"><strong>tidyverse</strong></a>, a collection of R packages designed for data science, and which provides functions to import, transform, and visualise the data.</p></li>
@@ -290,7 +302,17 @@ ul.task-list li input[type="checkbox"] {
 <li><p><a href="https://cran.r-project.org/web/packages/tmap/index.html"><strong>tmap</strong></a>, which provides functions for plotting cartographic quality static point patterns maps or interactive maps.</p></li>
 <li><p><a href="https://spatstat.org/"><strong>spatstat</strong></a>, to perform 1st- and 2nd-order spatial point patterns analysis and derive kernel density estimation (KDE) layers.</p></li>
 <li><p><a href="https://cran.r-project.org/web/packages/sparr/index.html"><strong>sparr</strong></a>, which provides functions to estimate kernel-smoothed spatial and spatio-temporal densities and relative risk functions, and perform subsequent inference.</p></li>
-<li><p><a href="https://cran.r-project.org/web/packages/stpp/index.html"><strong>stpp</strong></a>, which provides statistical tools for analyzing the global and local second-order properties of spatio-temporal point processes, including estimators of the space-time inhomogeneous K-function and pair correlation function.</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/sfdep/index.html"><strong>sfdep</strong></a>,an interface to ‘spdep’ to integrate with ‘sf’ objects and the ‘tidyverse’.</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/plotly/index.html"><strong>plotly</strong></a>, to create interactive web graphics from ‘ggplot2’ graphs.</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/zoo/index.html"><strong>zoo</strong></a>, an S3 class with methods for totally ordered indexed observations. It is particularly aimed at irregular time series of numeric vectors/matrices and factors. zoo’s key design goals are independence of a particular index/date/time class and consistency with ts and base R by providing methods to extend standard generics.</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/tmaptools/index.html"><strong>tmaptools</strong></a>, a set of tools for reading and processing spatial data. The aim is to supply the workflow to create thematic maps. This package also facilitates ‘tmap’, the package for visualizing thematic maps.</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/raster/index.html"><strong>raster</strong></a>, for reading, writing, manipulating, analyzing and modeling of spatial data.</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/shinydashboard/index.html"><strong>shinydashboard</strong></a>, to create dashboards with ‘Shiny’. This package provides a theme on top of ‘Shiny’, making it easy to create attractive dashboards.</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/shinythemes/index.html"><strong>shinythemes</strong></a>, which provides themes for use with Shiny.</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/bslib/index.html"><strong>bslib</strong></a>, which simplifies custom ‘CSS’ styling of both ‘shiny’ and ‘rmarkdown’ via ‘Bootstrap’ ‘Sass’.</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/viridis/index.html"><strong>viridis</strong></a>, a package for creating color maps designed to improve graph readability for readers with common forms of color blindness and/or color vision deficiency.</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/magick/index.html"><strong>magick</strong></a>, bindings to ‘ImageMagick’: the most comprehensive open-source image processing library available. Supports many common formats (png, jpeg, tiff, pdf, etc) and manipulations (rotate, scale, crop, trim, flip, blur, etc).</p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/rmapshaper/index.html"><strong>rmapshaper</strong></a>, to edit and simplify ‘geojson’, ‘Spatial’, and ‘sf’ objects.</p></li>
 </ul>
 </section>
 <section id="storyboard" class="level1">
@@ -305,10 +327,47 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="spatiotemporal-point-patterns-analysis-page" class="level2">
 <h2 class="anchored" data-anchor-id="spatiotemporal-point-patterns-analysis-page">Spatiotemporal Point Patterns Analysis Page</h2>
+<p><img src="images/STKDE-01.png" class="img-fluid"></p>
 </section>
 </section>
-<section id="section" class="level1">
-<h1><img src="images/STKDE-01.png" class="img-fluid"></h1>
+<section id="project-team-responsibilities" class="level1">
+<h1>7. <strong>Project Team Responsibilities</strong></h1>
+<p>The table below shows each member’s role throughout the project</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 38%">
+<col style="width: 61%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Member</th>
+<th>Responsibilities</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Samuel</td>
+<td><ul>
+<li>Spatial Point Patterns Analysis module</li>
+</ul></td>
+</tr>
+<tr class="even">
+<td>Lucas</td>
+<td><ul>
+<li><p>Spatiotemporal Point Patterns Analysis module</p></li>
+<li><p>Setting up project Netlify and Github repository</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td>Immanuel</td>
+<td><ul>
+<li><p>Data sourcing and wrangling</p></li>
+<li><p>Exploratory Data Analysis module</p></li>
+<li><p>Setting up integrated Shiny application</p></li>
+</ul></td>
+</tr>
+</tbody>
+</table>
 
 
 </section>
